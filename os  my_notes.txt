@@ -60,7 +60,7 @@ turn-around-time - (completion time - arrival time)
 waiting time- (TAT - burst time)
 responce time- (the time at which process get cpu first - arrival time)  
 2.3-2.11
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 3.1
 process synchronisation - two types->i)cooperative process - share same memory/buffer/code/resources ;ii)indipendent processes 
 race condition - A race condition is a situation that may occur inside a critical section. This happens when the result of multiple thread execution in critical section differs according to the order in which the threads execute
@@ -85,7 +85,7 @@ if semaphore s value is '0' ,then upcoming process goes to blocked state and s v
 (binary semaphore) -  1<->0
 -if semaphore value initialize by 1 ,if one process comes semaphore value becomes 0,no other value use cs but moved to blocked state,then after completion of process first,blocked process works with cs,then if no blocked process left semaphore becomes 1
 3.7- 3.10
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 4.1
 deadlock - if two or more process are waiting on happening of some event, which never happens ,then we say processes are involved in deadlock state
 conditions for deadlock
@@ -104,7 +104,7 @@ dead ignorance(ostrich methods)-just avoid it so no new code take access to reso
 deadlock prevention - four necessary condition of deadlock but if any one becomes false then deadlock not gonna occur;
 deadlock avoidance/detection(banker's algorithm) - give the informaton to system before the processes may go to deadlock state ;;;if i have some available resourses then i can fulfill need of any resourses so that deadlock not occur
 deadlock detection and recovery-starvation,rollback,selection of victim
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 5.1
 memory management - method of managing the primary memory,
 degree of multiprogramming - more and more process in the RAM at a time.
@@ -201,39 +201,6 @@ Least recently used --
 5.56
 Most recently used --
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-8.1
-security -> confidentiality;intigrity;availability
-domain structure - <object name,rigth-set> ;;set of access rights
-rigth-set ->subset of all valid operation performad on obj
-access matrix -> view protection as a matrix i=domain,j=object 
-copy,Owner,control -> use to change the content of access matrix
-security 4 levels -> physical,human,operating system,network
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-7.1
-file system - file is a collection of logically related entities.file system manage data to store and fetch in a particular manner
-file directories - collection of files
-tpes of file directories - single-level;two-level directory;tree-structure directory
-7.2
-file attributes -> name,extension,identifier,location,size,modified data,protection/permission,encryption
-file operations -> create,reading,writing,deleting,truncating,repositioning
-7.3
-allocation metheds-- two types
-i> contiguous
-ii> non-contiguos -> linked list allocation;index allocation
-good allocation -> access faster,efficient disk utilisation
-7.4
-contiguous allocation -- single continuous set of blocks allocated
-adv. -> easy to implement,excellent read performance
-dis. -> disk will bwcome fragmented,difficult to grow file
-7.5
-linked list allocation -- set of individual blocks is allocated with pointers pointing to next blocks
-adv. -> no external fragmentation, increase file size easily
-dis. -> large seek time,random access difficult,overhead of pointers
-7.6
-indexed allocation -- the file allocation table contains a separate one-level index for each file 
-adv. ->support direct access,no external fragmentation
-dis. ->pointer overhead,multilevel index 
------------------------------------------------------------------------------------------------------------------------------------------------------------------
 6.1
 Disk scheduling is done by operating systems to schedule I/O requests arriving for disk.
 6.2
@@ -267,8 +234,40 @@ cscan- the disk arm again scans the path that has been scanned, after reversing 
 starvation happens
 6.9
 clook- the disk arm in spite of going to the end goes only to the last request to be serviced in front of the head and then from there goes to the other end’s last request
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7.1
+file system - file is a collection of logically related entities.file system manage data to store and fetch in a particular manner
+file directories - collection of files
+tpes of file directories - single-level;two-level directory;tree-structure directory
+7.2
+file attributes -> name,extension,identifier,location,size,modified data,protection/permission,encryption
+file operations -> create,reading,writing,deleting,truncating,repositioning
+7.3
+allocation metheds-- two types
+i> contiguous
+ii> non-contiguos -> linked list allocation;index allocation
+good allocation -> access faster,efficient disk utilisation
+7.4
+contiguous allocation -- single continuous set of blocks allocated
+adv. -> easy to implement,excellent read performance
+dis. -> disk will bwcome fragmented,difficult to grow file
+7.5
+linked list allocation -- set of individual blocks is allocated with pointers pointing to next blocks
+adv. -> no external fragmentation, increase file size easily
+dis. -> large seek time,random access difficult,overhead of pointers
+7.6
+indexed allocation -- the file allocation table contains a separate one-level index for each file 
+adv. ->support direct access,no external fragmentation
+dis. ->pointer overhead,multilevel index 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+8.1
+security -> confidentiality;intigrity;availability
+domain structure - <object name,rigth-set> ;;set of access rights
+rigth-set ->subset of all valid operation performad on obj
+access matrix -> view protection as a matrix i=domain,j=object 
+copy,Owner,control -> use to change the content of access matrix
+security 4 levels -> physical,human,operating system,network
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
