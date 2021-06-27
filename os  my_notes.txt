@@ -1,0 +1,276 @@
++++++++++++++operating system++++++gate_smashers_youtube+++++++++++
+1.1
+operating system- it is a system software,works as an interface between user and hardware
+throughput- number of task per unit time
+work- resource management(hardware),process management(CPU),storage management(hard-disk),memory management(RAM),security
+->user <-> application <-> os <-> hardware
+1.2
+types of operating system -batch,multiprogramming,multitasking,real time os,distributed,clustered,embedded
+batch- create a batch of similar kind of job ->one batch comes after another batch works completed,Idle time more
+1.3
+multiprogramming os- non-preemptive,collection of processes is stays in RAM,then one process moves to cpu and after completion second process moves in cpu
+multitasking/time-sharing- every process is going to get cpu for some time then again comes to cpu after some process
+1.4
+real time- hard->do not delay,ex-flight simulation,soft->ex-youtube streaming
+distributed - machines is losely distributed at different geographical reason to reduce the impact of any particular site or hardware failure.
+clustered - machines is distributed but connected by small network like LAN,can be considered as one whole
+benefit of clustered/distributed - scalability,availability
+embedded - ex-ac,microwave,washing machine ,,cannot be evolved
+1.5
+process states--user understanding model
+ i)new-creating process,ex-c program,secondry memory work, moves from new to ready by long term scheduler(multiprograming)
+ ii)ready-ready queue(process in RAM),
+ iii)running-process is in ram but gets CPU(only one process at a time)
+ iv)wait/block,priority - wait for some input/output,priority process comes(multitasking)/time-sharing   --short term scheduler[preemptive],,,,,,suspend state is also here for this kind of process(medium term scheduler works here) then again go to ready state
+ v)terminate-deallocation of process from RAM
+1.6
+commands(linux)
+1.7
+system call
+-file related-open(),read(),write()
+-device related-read ,write
+-information- get system time and data
+-process control-fork,wait,signal
+-communication-create,delete
+1.8
+fork()-it is a system call,create child process(2^n - 1 ->number of child process,n==fork() call)
+-child process is the clone of parent,works same as parent,child=0,parent=1
+1.9
+example
+1.10
+user mode- work done by system call ,need an API/application for user,,mode-bit=1
+kernel mode- execute system call/operating system direct accessed by this,,mode-bit=0,,not directly accessed
+1.11
+process-need system call(fork()),context switching slower,blocking parents-not block child,child & parent is process seperately in OS
+thread- not full process is cloned(data,code-not clone),stack/register is different for all thread ,,no system call,context switching faster,blocking one can block both, both are single task as OS
+1.12
+user level thread-managed by user level library,faster,context switch faster,many thread moves to OS as one process,entire process get blocked if one thread blocked
+kernal level thread-managed by OS,slower,contest switching slower,no effect on other thread if one blocked
+switching time --  process>KLT>UST
+----------------------------------------------------------------------------------------------------------------------------------------------
+2.1
+CPU scheduling
+-> pre-emptive - shortest remaining time first,longest remaining time first,round robin,priority based
+-> non- pre-emptive- first come first serve, shortest job first,longest job first,highest responce ratio next,multilevel queue
+2.2
+arrival time- process enter in ready queue
+burst time- time required to get executed(duration of time need by process)
+completion time- time at which works completed and proces comes out 
+turn-around-time - (completion time - arrival time)
+waiting time- (TAT - burst time)
+responce time- (the time at which process get cpu first - arrival time)  
+2.3-2.11
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.1
+process synchronisation - two types->i)cooperative process - share same memory/buffer/code/resources ;ii)indipendent processes 
+race condition - A race condition is a situation that may occur inside a critical section. This happens when the result of multiple thread execution in critical section differs according to the order in which the threads execute
+critical section - The critical section is a code segment where the shared variables can be accessed.one process execute at a time.any thing is sahred,ex-memory,code,resource
+3.2
+3.3
+3.4
+entry section - if any process(program) want to use critical section then the process(program) must have to execute this section first.
+exit section - after the execution of the critical section by any process this section execution is done.
+4 condition of synchronisation--
+->mutual exclusion- no two process(program) use their critical section at the same time.
+->progress- Progress assured as a process outside the critical section does not block other processes who want to use it. 
+->bounded wait- no single process use critical section for infinite time ,it gives chance to another process also.
+->no assumptioon on speed- solution works on every oprating system,not related to processers
+spooler - when more than 1 process comes to get printer then the process is stacked in spooler memory one by one ,then execute according to time they come
+3.5
+(counting semaphore)
+semaphore- method use to prevent race condition,integer variable used in mutual exclusion manner by different processes
+semaphore operations - entry section-> p()/down/wait,,,,exit section->v()/up/signal/post/release
+if semaphore s value is '0' ,then upcoming process goes to blocked state and s value becomes --1 everytime, and after completing of process work,semaphore becomes ++1 and then allow process2 to enter the cs when semaphore value becomes <0.
+3.6
+(binary semaphore) -  1<->0
+-if semaphore value initialize by 1 ,if one process comes semaphore value becomes 0,no other value use cs but moved to blocked state,then after completion of process first,blocked process works with cs,then if no blocked process left semaphore becomes 1
+3.7- 3.10
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.1
+deadlock - if two or more process are waiting on happening of some event, which never happens ,then we say processes are involved in deadlock state
+conditions for deadlock
+i)mutual exclusion - different process dont use cs at same time
+ii)no preemption - no preemption happens to any process at critical section
+iii)hold & wait - whatever one process already holded ,don't leave if it gets another resourses
+iv)circular wait - making a loop with process and resources
+4.2
+resourse allocation graph (RAG)- 
+i)vertex - 1.process vertex(Pi)  ,,,2.resourse vertex-> single instance(cpu,monitor),multiple instance(register,stack)
+ii)edge - 1.assign edge - resourse assign to process ,,,2.request edge - process request an assign to resourse
+4.3
+4.4
+methods of deadlock handling-- 
+dead ignorance(ostrich methods)-just avoid it so no new code take access to resourses an also reduce performance;
+deadlock prevention - four necessary condition of deadlock but if any one becomes false then deadlock not gonna occur;
+deadlock avoidance/detection(banker's algorithm) - give the informaton to system before the processes may go to deadlock state ;;;if i have some available resourses then i can fulfill need of any resourses so that deadlock not occur
+deadlock detection and recovery-starvation,rollback,selection of victim
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5.1
+memory management - method of managing the primary memory,
+degree of multiprogramming - more and more process in the RAM at a time.
+5.2
+memory management techniques
+->contiguous -fixed(static) partition,variable(dynamic) partition 
+->non-contiguous-paging,multilevel paging,inverted paging,segmentation,segmented paging
+5.3
+fixed partitioning--
+->number of partition is fixed,size of partition may be same or not, process cannot get break down and fit into two partition 
+internal fragmentation- when size of process gets partition of more size,and the memory gets waste
+external fragmentation- although you have memory space free in different partitions u cannot take a new process
+5.4
+variable partitioning--
+->when the process comes it gets the memory of the size it wants
+no internal fragmentation;no limit of number of process;no limitation on processs size;external fragmentation suffer here(use compaction here but desirable);allocation &deallocation is complex
+5.5
+first-fit -> allocate the first location that is big enough
+next-fit -> same as first fit but start search from the last allocated hole 
+best-fit -> allocate the process at a location so that the internal fragmentation is the least
+worst-fit -> allocate the process in the largest memory leftover 
+5.6
+5.7
+5.8
+non-contigous memory allocation- a process can be breakdown and allocated at different memory location
+divide the process before it comes(divide in secondry memory) in main memory,main memory is already divided in small fraction called frame
+every divided partiton in process called pages
+page size == frame size
+interanl fragmentation not happens
+5.9
+logical address - (page number in binary,offset number in binary),,then page table use which contain frame number 
+physical address - (frame number in binary,frame offset size in binary)
+page number/frame --starts with zero
+5.10
+example(imp)
+number of entries in the page table == number of page in a process
+size of page table= size of each entry of page table*number of pages
+pagetable is also prosent in main memory
+5.11
+example
+K= 2^10  //  M= 2^20  //  G= 2^30
+5.12
+page table entities -> (wrx),(protection),(caching),(valid/invalid)
+5.13
+2-level paging -- (page table is also is in frame of main memory)
+used when-> logical address/table of page(page table) is greater than the size of frame and then page table divided and then new page is formed for this
+5.14
+inverted paging--
+-each process has it's own page table, so global page table is formed and it is the collection of pages of different processes in a single table
+global page table(page no. of process,process id)
+normal page table(frame no.)
+5.15
+example(imp)
+inverted page table size = 2^(physical address frame bits) * (each entry size)
+5.16
+thrashing--
+occurs when a computer's virtual memory resources are overused, leading to a constant state of paging and page faults,
+page fault - when the cpu needs any page of a process and it is not available in RAM
+when page hit is getting lower and page fault becomes more then threshing happens
+cure-> long term scheduler
+5.17
+paging vs segmentation
+--paging divide it into pages but segmentation divides it in section
+--faster-paging    slower-segmentation
+--paging is user invisible   segmentation is user visible
+--page size made by device  segment size decides by users
+--page are of same size   segment size may be different
+
+logical address gives (segment no.,segment data size/offset)
+segment table contains[segment no.(base address,size)] in each block
+segmentation helps in preventing page fault
+
+memory management unit helps in converting logical address in physical address
+segment data size cpu demand <= size of data at that segment ,else trap/error
+5.18
+overlay - swaping the segment which is in RAM to another segment in secondry memory when in use
+maximum memory used in overlay
+5.19
+virtual memory - compensate shortages of physical memory by transferring pages of data from random access memory to disk storage. 
+-rather than entire process in the main memory,we put only usefull pages of processes in main memory
+5.20
+TLB
+5.21
+TLB example
+5.22
+FIFO (page replacement algorithm)
+page hit   ///    page fault/miss
+5.23 
+belady's anamoly -- increase in frames increase in page fault 
+5.24
+optimal page replacement -- 
+5.25
+Least recently used --
+5.56
+Most recently used --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8.1
+security -> confidentiality;intigrity;availability
+domain structure - <object name,rigth-set> ;;set of access rights
+rigth-set ->subset of all valid operation performad on obj
+access matrix -> view protection as a matrix i=domain,j=object 
+copy,Owner,control -> use to change the content of access matrix
+security 4 levels -> physical,human,operating system,network
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7.1
+file system - file is a collection of logically related entities.file system manage data to store and fetch in a particular manner
+file directories - collection of files
+tpes of file directories - single-level;two-level directory;tree-structure directory
+7.2
+file attributes -> name,extension,identifier,location,size,modified data,protection/permission,encryption
+file operations -> create,reading,writing,deleting,truncating,repositioning
+7.3
+allocation metheds-- two types
+i> contiguous
+ii> non-contiguos -> linked list allocation;index allocation
+good allocation -> access faster,efficient disk utilisation
+7.4
+contiguous allocation -- single continuous set of blocks allocated
+adv. -> easy to implement,excellent read performance
+dis. -> disk will bwcome fragmented,difficult to grow file
+7.5
+linked list allocation -- set of individual blocks is allocated with pointers pointing to next blocks
+adv. -> no external fragmentation, increase file size easily
+dis. -> large seek time,random access difficult,overhead of pointers
+7.6
+indexed allocation -- the file allocation table contains a separate one-level index for each file 
+adv. ->support direct access,no external fragmentation
+dis. ->pointer overhead,multilevel index 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+6.1
+Disk scheduling is done by operating systems to schedule I/O requests arriving for disk.
+6.2
+data access time --
+i>seek time - time taken to (spindle) r/w head to reach desired track
+ii>rotation time - time taken by platter to rotate full 360 angle
+iii>rotational latency - half of rotation time 
+iv>transfer time - time to transfer the data. (total data/transfer speed)
+6.3
+disk scheduling algorithm -- goal->to mange the seek time
+-first come first serve
+-shortest seek time first
+-scan
+-look
+-cscan(circular scan)
+-clook(circular look)
+6.4
+fcfs- requests are addressed in the order they arrive in the disk queue. 
+no strvation
+6.5
+sstf- requests having shortest seek time are executed first
+starvation happens
+6.6
+scan- disk arm moves into a particular direction and services the requests coming in its path and after reaching the end of the disk, it reverses its direction and again services the request arriving in its path.
+starvation happens
+6.7
+look-  similar to the SCAN disk scheduling algorithm except for the difference that the disk arm in spite of going to the end of the disk goes only to the last request
+starvation happens
+6.8
+cscan- the disk arm again scans the path that has been scanned, after reversing its direction.
+starvation happens
+6.9
+clook- the disk arm in spite of going to the end goes only to the last request to be serviced in front of the head and then from there goes to the other end’s last request
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
