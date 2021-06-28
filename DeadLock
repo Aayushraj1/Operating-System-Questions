@@ -1,0 +1,8 @@
+#Important questions related to deadlock
+
+Q1 > What do you mean by deadlock?
+Q2 > Explain 4 neccessary conditions for deadlock? {Hint:Mutual Exclusion, No Preemption, Hold & Wait, Circular Wait}
+Q3 > What is resource allocation graph,vertex,edge?
+Q4 > Explain four important methods to handle deadlocks. {Hint: Ignorance, Prevention, Avoidence, detection and recovery}
+Q5 > Which deadlock handling method used in windows os?
+Q6 > Explain banker's algorithm.
